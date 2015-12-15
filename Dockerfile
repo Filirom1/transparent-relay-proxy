@@ -1,5 +1,5 @@
 FROM centos
-MAINTAINER Romain Philibert <romain.philibert@worldline.com>
+MAINTAINER Romain Philibert <romain.philibert@gmail.com>
 
 ENV NODE_VERSION 4.2.3
 
