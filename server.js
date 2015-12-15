@@ -9,10 +9,9 @@ var proxy = process.argv[2]
 console.log('using PAC proxy proxy file at %j', proxy);
  
 
-
-var agent = new PacProxyAgent(proxy, {tunnel: true});
-
 // HTTP(s) Proxy Relay
+var agent = new PacProxyAgent(proxy);
+
 var server = setup(http.createServer());
 server.agent = agent;
 server.listen(3128, function () {
@@ -22,6 +21,8 @@ server.listen(3128, function () {
 
 
 // Transparent tunnel TCP-To-Proxy 
+var agentTunnel = new PacProxyAgent(proxy, {tunnel: true});
+
 var server = net.createServer(onconnection);
 
 function onconnection(socket) {
@@ -29,10 +30,9 @@ function onconnection(socket) {
   var host = arr[0];
   var port = arr[1];
   if (host == '127.0.0.1') return
-  socket.used = true
 
   // transparent proxy
-  agent.callback(server, {host: host, port: port}, function(err, target){
+  agentTunnel.callback(server, {host: host, port: port}, function(err, target){
     if(err) return console.log(err)
     target.pipe(socket)
     socket.pipe(target)
