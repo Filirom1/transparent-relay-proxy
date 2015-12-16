@@ -13,6 +13,6 @@ ADD . /app
 WORKDIR /app
 RUN npm i
 
-ENTRYPOINT ["node", "/app/server.js"]
+ENTRYPOINT ["node", "/app/cluster.js"]
 CMD ["http://proxyconf.localnet/wpad.dat"]
 EXPOSE 3128 12345

@@ -18,7 +18,7 @@ all_proxy=localhost:3128 curl https://google.fr
 ## Transparent proxy
 
 ```
-iptables -t nat -A PREROUTING -p tcp --dport 80  -j REDIRECT --to 12345 -w
+iptables -t nat -A PREROUTING -p tcp --dport 80  -j REDIRECT --to 3128  -w
 iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to 12345 -w
 docker run --net=host -v `pwd`/PAC:/mnt/PAC --rm proxy pac+file:///mnt/PAC
 ```
