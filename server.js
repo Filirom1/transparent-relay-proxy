@@ -1,3 +1,5 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 var http = require('http');
 var setup = require('proxy');
 var url = require('url');
@@ -8,7 +10,6 @@ var getsockopt = require('./getsockopt')
 var proxy = process.argv[2]
 console.log('using PAC proxy proxy file at %j', proxy);
  
-
 // HTTP(s) Proxy Relay
 var agent = new PacProxyAgent(proxy);
 
