@@ -1,4 +1,4 @@
-FROM centos
+FROM centos:7
 MAINTAINER Romain Philibert <Filirom1@gmail.com>
 
 ENV NODE_VERSION 4.2.3
