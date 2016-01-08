@@ -1,0 +1,20 @@
+FROM alpine:edge
+MAINTAINER Romain Philibert <Filirom1@gmail.com>
+MAINTAINER Damien Duportal <damien.duportal@gmail.com>
+
+ADD ./package.json /app/
+WORKDIR /app
+
+RUN apk --update add \
+    g++ \
+    git \
+    make \
+    nodejs \
+    python \
+  && npm install
+
+ADD . /app
+
+ENTRYPOINT ["node", "/app/cluster.js"]
+CMD ["http://proxyconf.localnet/wpad.dat"]
+EXPOSE 3128 12345
