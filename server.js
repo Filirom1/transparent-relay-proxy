@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 var http = require('http');
@@ -35,9 +37,9 @@ function onconnection(socket) {
   // transparent proxy
   agentTunnel.callback(server, {host: host, port: port}, function(err, target){
     if(err) return console.log(err)
+    socket.on('error', function(err){console.log(err)})
     target.pipe(socket)
     socket.pipe(target)
   });
 }
-
 server.listen(12345);
